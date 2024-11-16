@@ -1,7 +1,5 @@
-export async function getVideo() {
-  const avStream = await navigator.mediaDevices.getUserMedia({
-    video: true,
-  });
+export async function getVideo(previewCanvas) {
+  const avStream = await navigator.mediaDevices.getUserMedia({ video: true, });
   const video = document.createElement("video");
 
   try {
@@ -13,22 +11,21 @@ export async function getVideo() {
     throw error;
   }
 
+  if (previewCanvas) {
+    video.addEventListener("canplay", () => { drawPreview(video, previewCanvas); });
+  }
+
   await video.play();
   return video;
 }
 
 export function drawVideo(video, canvas) {
-  console.log("draw");
-
   const context = canvas.getContext("2d");
-
-  /*
-  console.log(video.videoWidth);
-  console.log(canvas.width);
-  */
-
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-
-  context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight); // (x, y)
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
 }
+
+export function drawPreview(video, canvas) {
+  const context = canvas.getContext("2d");
+  setInterval(() => { context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight, 0, 0, canvas.width, canvas.height,); }, 16);
+}
+

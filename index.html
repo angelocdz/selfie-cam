@@ -1,27 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/javascript.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+
+    <link rel="stylesheet" type="text/css" href="./assets/pico.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/layout.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/modals.css" />
+
+    <title>Meme Me!</title>
   </head>
-  <body>
-    <div id="app">
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src="./vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <h1>Hello Self!</h1>
-          <canvas></canvas>
-        <div class="card">
-          <button id="camera" type="button">Take Selfie</button>
+  <body class="container grid">
+    <header><h1 class="impact">meme me!</h1></header>
+
+    <main>
+      <article>
+        <canvas id="meme" name="meme" aria-label="Meme image" alt="Empty meme placeholder" width="640" height="480"></canvas>
+      </article>
+    </main>
+
+    <nav>
+      <div id="steps" class="container">
+
+        <div class="step" id="take-selfie">
+          <div class="modal-content">
+            <canvas id="preview" width="320" height="240"></canvas>
+            <button id="save-photo">Save photo</button>
+          </div>
         </div>
-        <p class="read-the-docs">
-          Click on the Vite logo to learn more
-        </p>
+        <div class="step" id="add-text">
+          <div class="modal-content">
+            <input type="text" id="text-top" placeholder="top text" />
+            <input type="text" id="text-bottom" placeholder="bottom text" />
+            <button id="text-save">Save text</button>
+          </div>
+        </div>
+        <div id="settings">
+          <div class="modal-content">
+            <label id="dark-mode"><input type="checkbox" id="toggle" name="toggle" role="switch" checked />Dark mode</label>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </nav>
+
+    <footer>
+      <p>
+        Built with
+        <img width="20" height="20" src="/javascript.svg" alt="JS" /> &
+        <img width="20" height="20" src="/vite.svg" alt="Vite" /> & 💖 at
+        <a href="https://frontendmasters.com/courses/javascript-projects/" target="_blank">FrontendMasters</a>
+      </p>
+    </footer>
 
     <script type="module" src="/main.js"></script>
   </body>
